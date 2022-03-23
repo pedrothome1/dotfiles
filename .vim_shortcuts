@@ -1,0 +1,10 @@
+vimainc() {
+	if [[ "$#" -ne 1 ]]; then
+		echo "usage: vimainc <filename>"
+		return 0
+	fi
+
+	touch "$1"
+	echo -ne '#include <stdio.h>\n\nint main(int argc, char *argv[]) {\n  \n}\n' > "$1"
+	vim "$1"
+}
