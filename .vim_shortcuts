@@ -1,10 +1,22 @@
 vimainc() {
 	if [[ "$#" -ne 1 ]]; then
-		echo "usage: vimainc <filename>"
-		return 0
+		filename="main.c"
+	else
+		filename=$1
 	fi
 
-	touch "$1"
-	echo -ne '#include <stdio.h>\n\nint main(int argc, char *argv[]) {\n  \n}\n' > "$1"
-	vim "$1"
+	echo -ne '#include <stdio.h>\n\nint main(int argc, char *argv[]) {\n  \n}\n\n' > "$filename"
+	vim "$filename"
 }
+
+vimain() {
+	if [[ "$#" -ne 1 ]]; then
+		filename="main.cpp"
+	else
+		filename=$1
+	fi
+
+	echo -ne '#include <iostream>\n\nint main(int argc, char *argv[]) {\n  \n}\n\n' > "$filename"
+	vim "$filename"
+}
+
