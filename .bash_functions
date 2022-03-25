@@ -37,7 +37,7 @@ get_windows_home() {
 
 # Vim Shortcuts
 vimainc() {
-	local filename="${1:-main.c}"
+  local filename="${1:-main.c}"
 
   if [[ ! -f $filename ]]; then
     echo -ne \
@@ -46,13 +46,13 @@ vimainc() {
 "  \n"\
 "}\n\n" > "$filename"
   fi
-	
+  
   vim "$filename"
 }
 
 vimain() {
-	local filename="${1:-main.cpp}"
-	
+  local filename="${1:-main.cpp}"
+  
   if [[ ! -f $filename ]]; then
     echo -ne \
 "#include <iostream>\n\n"\
@@ -62,7 +62,7 @@ vimain() {
 "}\n\n" > "$filename"
   fi
 
-	vim "$filename"
+  vim "$filename"
 }
 
 vimsh() {
@@ -77,8 +77,8 @@ vimsh() {
 }
 
 vimpy() {
-  	local filename="${1:-main.py}"
-	
+  local filename="${1:-main.py}"
+  
   if [[ ! -f $filename ]]; then
     echo -ne \
 "#!/usr/bin/env python3\n\n"\
@@ -90,5 +90,5 @@ vimpy() {
     chmod u+x "$filename"
   fi
 
-	vim "$filename"
+  vim "$filename"
 }
