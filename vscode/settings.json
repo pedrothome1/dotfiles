@@ -1,0 +1,30 @@
+{
+    "extensions.ignoreRecommendations": true,
+    "explorer.confirmDelete": false,
+    "workbench.tree.renderIndentGuides": "none",
+    "terminal.integrated.tabs.enabled": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.renderLineHighlight": "none",
+    "editor.minimap.enabled": false,
+    "editor.formatOnSave": false,
+
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.allowNoVerifyCommit": true,
+    "git.confirmNoVerifyCommit": false,
+
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": ["--style='{based_on_style: pep8, indent_width: 2}'"],
+    
+    "codesnap.shutterAction": "copy",
+
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    }
+}
