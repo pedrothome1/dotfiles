@@ -3,6 +3,12 @@
 
 [[ -x /usr/bin/lesspipe ]] && eval "$(SHELL=/bin/sh lesspipe)"
 
+if [[ ! -d "$HOME/bin" ]]; then
+  mkdir "$HOME/bin"
+fi
+
+add_to_path "$HOME/bin" top
+
 # Colors
 if [[ $TERM = *color* ]]; then
   PS1='\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
