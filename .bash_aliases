@@ -5,6 +5,7 @@ alias .....='cd ../../../..'
 
 alias ls='ls --color=auto'
 alias l='ls -lA'
+alias L='ls -l'
 alias lh='ls -ld .?*'
 
 alias grep='grep --color=auto'
