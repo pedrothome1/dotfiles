@@ -7,16 +7,17 @@ alias gc='git commit --verbose'
 alias gcmsg='git commit --message'
 alias gp='git push'
 alias gpsup='git push --set-upstream origin'
-alias grep='grep --color=auto'
-alias ls='ls --color'
+alias gpf='git push --force-with-lease'
+alias 'gcan!'='git add . && git commit --amend --no-edit'
+alias ls='ls --color=auto'
 alias la='ls -lAh'
 alias ll='ls -lh'
-alias ls='ls --color=auto'
 alias lsa='ls -lah'
 alias tree='tree -C'
+alias grep='grep --color=auto'
 alias md='mkdir -p'
 alias rd='rmdir'
-alias diff='diff --color'
+alias diff='diff --color=auto'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -64,6 +65,25 @@ rm() {
   wait
 
   env rm "${opts[@]}" "${files[@]}"
+}
+
+dotfiles() {
+  if [[ "$#" -eq 0 ]]; then
+    echo "usage: dotfiles [push]"
+    return 0
+  fi
+
+  if [[ "$1" == "push" ]]; then
+  (
+    cd ~/code/dotfiles
+
+    if [[ $(git status --short) != "" ]]; then
+      git add .
+      git commit -m "updating dotfiles via dotfiles() shell function"
+      git push
+    fi
+  )
+  fi
 }
 
 is_wsl2() {
