@@ -7,6 +7,7 @@ alias gc='git commit --verbose'
 alias gcmsg='git commit --message'
 alias gp='git push'
 alias gb='git branch --show-current'
+alias gd='git diff'
 alias gpsup='git push --set-upstream origin HEAD'
 alias gpf='git push --force-with-lease'
 alias grst='git restore --staged'
@@ -21,6 +22,8 @@ alias grep='grep --color=auto'
 alias md='mkdir -p'
 alias rd='rmdir'
 alias diff='diff --color=auto'
+alias less='less -r'
+alias jq='jq -C'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -86,6 +89,8 @@ dotfiles() {
       git push
     fi
   )
+  elif [[ "$1" == "status" ]]; then
+    ( cd ~/code/dotfiles && git status "${@:2}" )
   fi
 }
 
