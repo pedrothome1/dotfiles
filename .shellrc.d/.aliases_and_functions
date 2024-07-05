@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+alias gs="git status"
+alias ga='git add'
+alias gaa='git add --all'
+alias gc='git commit --verbose'
+alias gcmsg='git commit --message'
+alias gp='git push'
+alias gpsup='git push --set-upstream origin'
+alias grep='grep --color=auto'
+alias ls='ls --color'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias ls='ls --color=auto'
+alias lsa='ls -lah'
+alias tree='tree -C'
+alias md='mkdir -p'
+alias rd='rmdir'
+alias diff='diff --color'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+alias l &> /dev/null && unalias l
+alias rm &> /dev/null && unalias rm
+
+l() {
+  if [[ "$#" -eq 1 && -f "$1" ]]; then
+    less -r "$1"
+    return "$?"
+  fi
+
+  ls -lAh "$@"
+}
+
+rm() {
+  local -a params=("${@}")
+  local i
+
+  for (( i = 0; i < "${#params[@]}"; i++ )) do
+    if [[ -e "${params[i]}" ]]; then
+      break
+    fi
+  done
+
+  opts=("${params[@]:0:${i}}")
+
+  if (( i < "${#params[@]}" )); then
+    files=("${params[@]:${i}}")
+  else
+    files=()
+  fi
+  
+  # We move deleted files to trash so they can be easily recovered.
+  if [[ ! -d "$HOME/.Trash" ]]; then
+    mkdir "$HOME/.Trash"
+  fi
+  local file
+  for file in "${files[@]}"; do
+    ( cp -rp "$file" "$HOME/.Trash/" &> /dev/null & )
+  done
+  wait
+
+  env rm "${opts[@]}" "${files[@]}"
+}
+
+is_wsl2() {
+  $(uname -r | grep -iq wsl2) || -n "$WSL_DISTRO_NAME"
+}
+
