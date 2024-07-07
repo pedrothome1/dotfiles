@@ -91,6 +91,8 @@ dotfiles() {
   )
   elif [[ "$1" == "status" ]]; then
     ( cd ~/code/dotfiles && git status "${@:2}" )
+  elif [[ "$1" == "diff" ]]; then
+    ( cd ~/code/dotfiles && git diff "${@:2}" )
   fi
 }
 
