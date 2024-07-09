@@ -58,8 +58,9 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap { gT
 nnoremap } gt
-tnoremap û <C-w>NgT
-tnoremap ý <C-w>Ngt
+
+" Enter terminal normal mode
+tnoremap <C-n> <C-w>N
 
 " Copy & Paste
 vnoremap <C-c> "+ygvy
