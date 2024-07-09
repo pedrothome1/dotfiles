@@ -4,6 +4,8 @@ set nocompatible
 set nobackup
 set writebackup
 set encoding=utf-8
+set timeoutlen=1000
+set ttimeoutlen=0
 
 " Global indentation settings
 set expandtab
@@ -13,7 +15,7 @@ set tabstop=2
 set softtabstop=-1 " use shiftwidth value
 set shiftwidth=2
 
-" Go indentation settings
+" Go settings
 augroup go_settings
   autocmd!
   autocmd FileType go setlocal noexpandtab
@@ -21,6 +23,12 @@ augroup go_settings
   autocmd FileType go setlocal shiftwidth=4
   autocmd FileType go setlocal foldmethod=syntax " vim-go uses this
 augroup END 
+
+" Vim settings
+augroup vim_settings
+  autocmd!
+  autocmd BufWritePost .vimrc source %
+augroup END
 
 " Syntax highlighting
 syntax on
@@ -50,6 +58,23 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap { gT
 nnoremap } gt
+tnoremap û <C-w>NgT
+tnoremap ý <C-w>Ngt
+
+" Copy & Paste
+vnoremap <C-c> "+ygvy
+inoremap <C-v> <Esc>"+pa
+inoremap <C-p> <Esc>pa
+
+" Forbid arrow keys usage
+noremap <Right> <Nop>
+noremap <Left> <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+inoremap <Right> <Nop>
+inoremap <Left> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
 
 " Folding
 noremap + :foldopen!<Esc>
@@ -59,14 +84,8 @@ set foldlevelstart=99
 " Movements in Normal, Visual, Select and Operator-pending modes
 noremap J }
 noremap K {
-noremap q b
-noremap Q B
-noremap s ^
-noremap f $
-noremap S 0
-noremap F $
-noremap w e
-noremap W E
+noremap H ^
+noremap L $
 
 " Move selected lines in Visual mode
 vnoremap <C-k> :m '<-2<CR>gv=gv
@@ -77,23 +96,12 @@ call plug#begin()
   Plug 'preservim/nerdtree'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
-  Plug 'terryma/vim-multiple-cursors'
   Plug 'junegunn/vader.vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 " nerdtree
 nnoremap <leader>e :NERDTreeToggle<CR>
-
-" vim-multiple-cursors
-noremap <C-g> <Nop>
-noremap <S-C-n> <Nop>
-noremap <C-n> <nop>
-noremap <C-N> <Nop>
-
-let g:multi_cursor_start_word_key      = '<C-g>'
-let g:multi_cursor_next_key            = '<C-g>'
-let g:multi_cursor_select_all_word_key = '<C-n>'
 
 " fzf
 nnoremap <leader>o :Files<CR>
@@ -110,4 +118,27 @@ let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
+
+def! FormatFiles()
+  var files = ""
+
+  redir => files
+  silent GoFiles
+  redir END
+
+  new
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+
+  files = trim(files, "\n []")
+  var line = 1
+
+  for file in split(files, ',')
+    setline(line, trim(file, " '"))
+    line += 1
+  endfor
+
+  setlocal nomodifiable
+enddef
 
