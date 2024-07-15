@@ -18,11 +18,16 @@ set shiftwidth=2
 " Go settings
 augroup go_settings
   autocmd!
-  autocmd FileType go setlocal noexpandtab
-  autocmd FileType go setlocal tabstop=4
-  autocmd FileType go setlocal shiftwidth=4
-  autocmd FileType go setlocal foldmethod=syntax " vim-go uses this
+  autocmd FileType go,gomod setlocal noexpandtab
+  autocmd FileType go,gomod setlocal tabstop=4
+  autocmd FileType go,gomod setlocal shiftwidth=4
 augroup END 
+
+" JS/TS settings
+augroup js_settings
+  autocmd!
+  autocmd FileType {java,type}script{react,} command! WB execute 'wa' | execute 'AsyncRun NO_COLOR=1 npm run build'
+augroup END
 
 " Vim settings
 augroup vim_settings
@@ -99,6 +104,8 @@ call plug#begin()
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vader.vim'
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'skywind3000/asyncrun.vim'
+  Plug 'dense-analysis/ale'
 call plug#end()
 
 " nerdtree
@@ -109,6 +116,7 @@ nnoremap <leader>o :Files<CR>
 let g:fzf_action = { 'enter': 'tab split' }
 
 " vim-go
+let g:go_fold_enable = []
 let g:go_doc_keywordprg_enabled = 0           " disable K mapping to show docs
 let g:go_highlight_operators = 1
 let g:go_highlight_functions = 1
@@ -119,6 +127,16 @@ let g:go_highlight_types = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_format_strings = 1
 let g:go_highlight_variable_declarations = 1
+
+" asyncrun
+let g:asyncrun_open = 8
+
+" ALE
+let g:ale_linters_explicit = 1
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
 
 def! FormatFiles()
   var files = ""

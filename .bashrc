@@ -16,3 +16,11 @@ if which zoxide &>/dev/null; then
   eval "$(zoxide init bash)"
 fi
 
+if [[ -f /usr/local/opt/asdf/libexec/asdf.sh ]]; then
+  . /usr/local/opt/asdf/libexec/asdf.sh
+fi
+
+if [[ -f /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash ]]; then
+  . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+fi
+
