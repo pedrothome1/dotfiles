@@ -1,2 +1,4 @@
 .companyrc
 *.swp
+.vim/plugged
+.vim/.netrwhist
