@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
 
-if [[ "$(uname -s)" == "Darwin" && true ]]; then
+export OS_NAME="$(uname -s)"
+
+if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export DARWIN_USING_GNU='true'
+  
+  if [[ -z "$HOMEBREW_PREFIX" ]]; then
+    HOMEBREW_PREFIX="$(brew --prefix)"
+  fi
 
-  export PATH="$(brew --prefix)/opt/coreutils/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/findutils/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/gnu-tar/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/gawk/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/gnu-indent/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/gnu-getopt/bin:$PATH"
-  export PATH="$(brew --prefix)/opt/grep/libexec/gnubin:$PATH"
-  export PATH="$(brew --prefix)/opt/less/bin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/gnu-getopt/bin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/less/bin:$PATH"
 
-  export MANPATH="$(brew --prefix)/opt/coreutils/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/findutils/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/gnu-tar/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/gnu-sed/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/gawk/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/gnu-indent/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/gnu-getopt/share/man:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/grep/libexec/gnuman:$MANPATH"
-  export MANPATH="$(brew --prefix)/opt/less/share/man:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/gnu-indent/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/gnu-getopt/share/man:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/less/share/man:$MANPATH"
 fi
 
 if ls -d ~/sdk/go* &>/dev/null; then
