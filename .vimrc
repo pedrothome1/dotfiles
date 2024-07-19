@@ -39,6 +39,7 @@ augroup END
 syntax on
 colorscheme sorbet
 set termguicolors
+set re=0
 
 " Common typos on commands
 cabbrev W w
@@ -110,6 +111,7 @@ call plug#end()
 
 " nerdtree
 nnoremap <leader>e :NERDTreeToggle<CR>
+:let g:NERDTreeWinSize = 50
 
 " fzf
 nnoremap <leader>o :Files<CR>

@@ -18,6 +18,8 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export PATH="$HOMEBREW_PREFIX/opt/gnu-getopt/bin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/less/bin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
+  export PATH="$HOMEBREW_PREFIX/opt/m4/bin:$PATH"
 
   export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
@@ -28,6 +30,8 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export MANPATH="$HOMEBREW_PREFIX/opt/gnu-getopt/share/man:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/less/share/man:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/make/libexec/gnuman:$MANPATH"
+  export MANPATH="$HOMEBREW_PREFIX/opt/m4/share/man"
 fi
 
 if ls -d ~/sdk/go* &>/dev/null; then
@@ -35,6 +39,7 @@ if ls -d ~/sdk/go* &>/dev/null; then
 fi
 
 export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:$HOME/go/bin
 export PATH=$HOME/bin:$PATH
 
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden"

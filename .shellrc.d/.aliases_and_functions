@@ -6,7 +6,6 @@ alias gaa='git add --all'
 alias gc='git commit --verbose'
 alias gcmsg='git commit --message'
 alias gp='git push'
-alias gb='git branch --show-current'
 alias gd='git diff'
 alias gpsup='git push --set-upstream origin HEAD'
 alias gpf='git push --force-with-lease'
@@ -71,6 +70,23 @@ rm() {
   wait
 
   env rm "${opts[@]}" "${files[@]}"
+}
+
+gb() {
+  # Try to get branch name
+  ref="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
+  if [[ -n "$ref" ]]; then
+    echo "$ref"
+  else
+    # Try to get tag name (detached HEAD)
+    ref="$(git describe --tags --exact-match 2>/dev/null || true)"
+    if [[ -n "$ref" ]]; then
+      echo "$ref"
+    else
+      # Get commit hash (detached HEAD)
+      echo "$(git rev-parse --short HEAD)"
+    fi
+  fi
 }
 
 dotfiles() {
