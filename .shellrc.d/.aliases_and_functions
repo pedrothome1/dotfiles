@@ -102,7 +102,7 @@ dotfiles() {
     if [[ $(git status --short) != "" ]]; then
       git add .
       git commit -m "updating dotfiles via dotfiles() shell function"
-      git push
+      git push --set-upstream origin/master
     fi
   )
   elif [[ "$1" == "pull" ]]; then
