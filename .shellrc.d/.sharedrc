@@ -31,11 +31,7 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export MANPATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/less/share/man:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/make/libexec/gnuman:$MANPATH"
-  export MANPATH="$HOMEBREW_PREFIX/opt/m4/share/man"
-fi
-
-if ls -d ~/sdk/go* &>/dev/null; then
-  export PATH="$(ls -d ~/sdk/go* | sort -V | tail -n 1)/bin":$PATH
+  export MANPATH="$HOMEBREW_PREFIX/opt/m4/share/man:$MANPATH"
 fi
 
 export PATH=$PATH:$HOME/.local/bin

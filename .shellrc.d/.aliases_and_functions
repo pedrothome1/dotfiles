@@ -58,7 +58,7 @@ rm() {
   else
     files=()
   fi
-  
+
   # We move deleted files to trash so they can be easily recovered.
   if [[ ! -d "$HOME/.Trash" ]]; then
     mkdir "$HOME/.Trash"
@@ -105,14 +105,50 @@ dotfiles() {
       git push
     fi
   )
+  elif [[ "$1" == "pull" ]]; then
+  (
+    cd ~/code/dotfiles
+    git pull
+  )
   elif [[ "$1" == "status" ]]; then
     ( cd ~/code/dotfiles && git status "${@:2}" )
   elif [[ "$1" == "diff" ]]; then
     ( cd ~/code/dotfiles && git diff "${@:2}" )
+  elif [[ "$1" =~ ^-?-?(e|edit)$ ]]; then
+    ( cd ~/code/dotfiles && vim )
+
+    local rcfile
+    if rcfile=.$(basename ${0/#-/})rc; then
+      . ~/$rcfile
+    fi
   fi
 }
 
 is_wsl2() {
   $(uname -r | grep -iq wsl2) || -n "$WSL_DISTRO_NAME"
+}
+
+go() {
+  local bin
+  if bin="$(which go)"; then
+    "$bin" "$@"
+    return $?
+  fi
+
+  local _alias
+  if _alias="$(alias go 2>/dev/null)"; then
+    go "$@"
+    return $?
+  fi
+
+  local versions
+  versions="$(ls -d ~/go/bin/go[0-9]* 2>/dev/null)"
+
+  if [[ $? -ne 0 ]]; then
+    echo "go not found" >&2
+    return 1
+  fi
+
+  "$(printf "$versions" | sort -V | tail -n1)" "$@"
 }
 
