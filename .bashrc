@@ -16,6 +16,14 @@ if which zoxide &>/dev/null; then
   eval "$(zoxide init bash)"
 fi
 
+if which direnv &>/dev/null; then
+  eval "$(direnv hook bash)"
+fi
+
+if which mise &>/dev/null; then
+  eval "$(mise activate bash)"
+fi
+
 if [[ "$OS_NAME" == "Darwin" ]]; then
   if [[ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]]; then
     . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"

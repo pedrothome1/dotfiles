@@ -128,27 +128,3 @@ is_wsl2() {
   $(uname -r | grep -iq wsl2) || -n "$WSL_DISTRO_NAME"
 }
 
-go() {
-  local bin
-  if bin="$(which go)"; then
-    "$bin" "$@"
-    return $?
-  fi
-
-  local _alias
-  if _alias="$(alias go 2>/dev/null)"; then
-    go "$@"
-    return $?
-  fi
-
-  local versions
-  versions="$(ls -d ~/go/bin/go[0-9]* 2>/dev/null)"
-
-  if [[ $? -ne 0 ]]; then
-    echo "go not found" >&2
-    return 1
-  fi
-
-  "$(printf "$versions" | sort -V | tail -n1)" "$@"
-}
-

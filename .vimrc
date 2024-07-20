@@ -6,6 +6,7 @@ set writebackup
 set encoding=utf-8
 set timeoutlen=1000
 set ttimeoutlen=0
+set backspace=indent,eol,start
 
 " Global indentation settings
 set expandtab
