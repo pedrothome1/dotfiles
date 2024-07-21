@@ -1,0 +1,6 @@
+source ~/.vimrc
+
+set scrolloff=5
+set commentary
+
+map <leader>o <Action>(GotoFile)

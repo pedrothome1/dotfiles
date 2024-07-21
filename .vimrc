@@ -108,6 +108,7 @@ call plug#begin()
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'skywind3000/asyncrun.vim'
   Plug 'dense-analysis/ale'
+  Plug 'tpope/vim-commentary'
 call plug#end()
 
 " nerdtree
