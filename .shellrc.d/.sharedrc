@@ -9,7 +9,6 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
     HOMEBREW_PREFIX="$(brew --prefix)"
   fi
 
-  export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
@@ -21,7 +20,6 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/m4/bin:$PATH"
 
-  export MANPATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnuman:$MANPATH"
@@ -41,9 +39,72 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
 
     zcat -f "$(command man -w "$@")" | mandoc -Tascii -Owidth=80 | less
   }
+
+  link_coreutils() {
+    # Both ~/.local/bin and ~/.local/man
+    # will contain symlinks to coreutils executables
+    mkdir -p ~/.local/bin
+    mkdir -p ~/.local/man
+    
+    local -a to_link=(
+      '['
+      base32
+      base64
+      basename
+      cat
+      cut
+      date
+      echo
+      head
+      od
+      printf
+      realpath
+      seq
+      sha1sum
+      sha224sum
+      sha256sum
+      sha384sum
+      sha512sum
+      sleep
+      sort
+      tail
+      tee
+      test
+      uniq
+      wc
+    )
+    local cmd cmd_gnu man_gnu
+    local -r cache_flag=~/.cache/link_coreutils
+
+    command rm -f "$cache_flag"
+
+    for cmd in "${to_link[@]}"; do
+      if [[ ! -h ~/.local/bin/$cmd ]]; then
+        echo "$cmd not found! Linking..."
+
+        cmd_gnu="$HOMEBREW_PREFIX/opt/coreutils/bin/g${cmd}"
+        man_gnu="$HOMEBREW_PREFIX/opt/coreutils/share/man/man1/g${cmd}.1"
+        if [[ -f "$cmd_gnu" ]]; then
+          ln -s "$cmd_gnu" ~/.local/bin/$cmd
+        fi
+        if [[ -f "$man_gnu" ]]; then
+          ln -s "$man_gnu" ~/.local/man/$cmd.1
+        fi
+      fi
+    done
+
+    mkdir -p ~/.cache 
+    touch "$cache_flag"
+  }
+
+  if [[ ! -f ~/.cache/link_coreutils ]]; then
+    link_coreutils
+  fi
 fi
 
 export PATH=$PATH:$HOME/.local/bin
+export MANPATH=$HOME/.local/man:${MANPATH/%:/}
+
 export PATH=$PATH:$HOME/go/bin
 export PATH=$HOME/bin:$PATH
 
