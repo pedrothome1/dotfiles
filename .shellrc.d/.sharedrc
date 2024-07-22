@@ -32,11 +32,22 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export MANPATH="$HOMEBREW_PREFIX/opt/less/share/man:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/make/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/m4/share/man:$MANPATH"
+  
+  man() {
+    if [[ ! "$1" =~ ^[A-Za-z0-9_]+$ ]]; then
+      command man "$@"
+      return $?
+    fi
+
+    zcat -f "$(command man -w "$@")" | mandoc -Tascii -Owidth=80 | less
+  }
 fi
 
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH=$HOME/bin:$PATH
+
+export MANCOLOR=1
 
 export FZF_DEFAULT_COMMAND="fd --type f --strip-cwd-prefix --hidden"
 

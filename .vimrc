@@ -16,26 +16,6 @@ set tabstop=2
 set softtabstop=-1 " use shiftwidth value
 set shiftwidth=2
 
-" Go settings
-augroup go_settings
-  autocmd!
-  autocmd FileType go,gomod setlocal noexpandtab
-  autocmd FileType go,gomod setlocal tabstop=4
-  autocmd FileType go,gomod setlocal shiftwidth=4
-augroup END 
-
-" JS/TS settings
-augroup js_settings
-  autocmd!
-  autocmd FileType {java,type}script{react,} command! WB execute 'wa' | execute 'AsyncRun NO_COLOR=1 npm run build'
-augroup END
-
-" Vim settings
-augroup vim_settings
-  autocmd!
-  autocmd BufWritePost .vimrc source %
-augroup END
-
 " Syntax highlighting
 syntax on
 colorscheme sorbet
@@ -102,6 +82,7 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 " vim-plug
 call plug#begin()
   Plug 'preservim/nerdtree'
+  Plug 'preservim/tagbar'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vader.vim'
@@ -142,6 +123,28 @@ let g:ale_fixers = {
 \   'css': ['prettier'],
 \}
 
+" Go settings
+augroup go_settings
+  autocmd!
+  autocmd FileType go,gomod setlocal noexpandtab
+  autocmd FileType go,gomod setlocal tabstop=4
+  autocmd FileType go,gomod setlocal shiftwidth=4
+  autocmd FileType go nnoremap <buffer> <silent> gd <Plug>(go-def-tab)
+augroup END 
+
+" JS/TS settings
+augroup js_settings
+  autocmd!
+  autocmd FileType {java,type}script{react,} command! WB execute 'wa' | execute 'AsyncRun NO_COLOR=1 npm run build'
+augroup END
+
+" Vim settings
+augroup vim_settings
+  autocmd!
+  autocmd BufWritePost .vimrc source %
+augroup END
+
+" Helpers
 def! FormatFiles()
   var files = ""
 
