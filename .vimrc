@@ -1,4 +1,4 @@
-" General settings
+
 set nu
 set nocompatible
 set nobackup
@@ -15,12 +15,6 @@ set autoindent
 set tabstop=2
 set softtabstop=-1 " use shiftwidth value
 set shiftwidth=2
-
-" Syntax highlighting
-syntax on
-colorscheme sorbet
-set termguicolors
-set re=0
 
 " Common typos on commands
 cabbrev W w
@@ -90,7 +84,17 @@ call plug#begin()
   Plug 'skywind3000/asyncrun.vim'
   Plug 'dense-analysis/ale'
   Plug 'tpope/vim-commentary'
+  Plug 'hashivim/vim-terraform'
+  
+  Plug 'nordtheme/vim'
 call plug#end()
+
+" Syntax highlighting
+syntax on
+colorscheme nord
+let $BAT_THEME='Nord'
+set termguicolors
+set re=0
 
 " nerdtree
 nnoremap <leader>e :NERDTreeToggle<CR>

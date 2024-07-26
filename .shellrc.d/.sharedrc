@@ -41,10 +41,11 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   }
 
   link_coreutils() {
-    # Both ~/.local/bin and ~/.local/man
+    # Both ~/.local/bin and ~/.local/man/man1
     # will contain symlinks to coreutils executables
+    # and manual pages
     mkdir -p ~/.local/bin
-    mkdir -p ~/.local/man
+    mkdir -p ~/.local/man/man1
     
     local -a to_link=(
       '['
@@ -80,15 +81,13 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
 
     for cmd in "${to_link[@]}"; do
       if [[ ! -h ~/.local/bin/$cmd ]]; then
-        echo "$cmd not found! Linking..."
-
         cmd_gnu="$HOMEBREW_PREFIX/opt/coreutils/bin/g${cmd}"
         man_gnu="$HOMEBREW_PREFIX/opt/coreutils/share/man/man1/g${cmd}.1"
         if [[ -f "$cmd_gnu" ]]; then
           ln -s "$cmd_gnu" ~/.local/bin/$cmd
         fi
         if [[ -f "$man_gnu" ]]; then
-          ln -s "$man_gnu" ~/.local/man/$cmd.1
+          ln -s "$man_gnu" ~/.local/man/man1/$cmd.1
         fi
       fi
     done
@@ -102,10 +101,10 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   fi
 fi
 
-export PATH=$PATH:$HOME/.local/bin
-export MANPATH=$HOME/.local/man:${MANPATH/%:/}
+export PATH=$HOME/.local/bin:$PATH
+export MANPATH=$HOME/.local/man:$MANPATH
 
-export PATH=$PATH:$HOME/go/bin
+export PATH=$HOME/go/bin:$PATH
 export PATH=$HOME/bin:$PATH
 
 export MANCOLOR=1

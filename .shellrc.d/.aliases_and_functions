@@ -116,11 +116,6 @@ dotfiles() {
     ( cd ~/code/dotfiles && git diff "${@:2}" )
   elif [[ "$1" =~ ^-?-?(e|edit)$ ]]; then
     ( cd ~/code/dotfiles && vim )
-
-    local rcfile
-    if rcfile=.$(basename ${0/#-/})rc; then
-      . ~/$rcfile
-    fi
   fi
 }
 
