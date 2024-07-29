@@ -85,6 +85,7 @@ call plug#begin()
   Plug 'dense-analysis/ale'
   Plug 'tpope/vim-commentary'
   Plug 'hashivim/vim-terraform'
+  Plug 'mattn/emmet-vim'
   
   Plug 'nordtheme/vim'
 call plug#end()
@@ -98,7 +99,7 @@ set re=0
 
 " nerdtree
 nnoremap <leader>e :NERDTreeToggle<CR>
-:let g:NERDTreeWinSize = 50
+:let g:NERDTreeWinSize = 55
 
 " fzf
 nnoremap <leader>o :Files<CR>
