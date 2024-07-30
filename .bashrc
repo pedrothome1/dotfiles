@@ -1,6 +1,9 @@
 . ~/.shellrc.d/.sharedrc
 
+HISTSIZE=9999
+HISTCONTROL='erasedups'
 shopt -s histappend
+
 PROMPT_COMMAND='history -a'
 
 bind 'set show-all-if-ambiguous on'
