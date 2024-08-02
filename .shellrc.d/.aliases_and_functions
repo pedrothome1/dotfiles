@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-alias gs="git status"
+alias gs="git status -uall"
 alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit --verbose'
@@ -91,7 +91,7 @@ gb() {
 
 dotfiles() {
   if [[ "$#" -eq 0 ]]; then
-    echo "usage: dotfiles [push]"
+    echo "usage: dotfiles [push] [pull] [status] [diff] [-e|--edit|e|edit]"
     return 0
   fi
 

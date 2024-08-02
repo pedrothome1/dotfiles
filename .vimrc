@@ -134,7 +134,7 @@ augroup go_settings
   autocmd FileType go,gomod setlocal noexpandtab
   autocmd FileType go,gomod setlocal tabstop=4
   autocmd FileType go,gomod setlocal shiftwidth=4
-  autocmd FileType go nnoremap <buffer> <silent> gd <Plug>(go-def-tab)
+  "autocmd FileType go nnoremap <buffer> <silent> gd <Plug>(go-def-tab)
 augroup END 
 
 " JS/TS settings
