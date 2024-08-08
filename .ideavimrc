@@ -1,6 +1,16 @@
 source ~/.vimrc
 
+unmap <Left>
+unmap <Up>
+unmap <Down>
+unmap <Right>
+iunmap <Left>
+iunmap <Up>
+iunmap <Down>
+iunmap <Right>
+
 set scrolloff=5
 set commentary
 
 map <leader>o <Action>(GotoFile)
+

@@ -1,4 +1,3 @@
-
 set nu
 set nocompatible
 set nobackup
