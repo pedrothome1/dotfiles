@@ -37,3 +37,5 @@ if [[ "$OS_NAME" == "Darwin" ]]; then
   fi
 fi
 
+## The following line is added by pre-commit
+export PATH="/private/var/root/Library/Python/3.9/bin:$PATH"

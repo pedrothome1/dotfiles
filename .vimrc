@@ -47,16 +47,6 @@ vnoremap <C-c> "+ygvy
 inoremap <C-v> <Esc>"+pa
 inoremap <C-p> <Esc>pa
 
-" Forbid arrow keys usage
-noremap <Right> <Nop>
-noremap <Left> <Nop>
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-inoremap <Right> <Nop>
-inoremap <Left> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-
 " Folding
 noremap + :foldopen!<Esc>
 noremap _ :foldclose<Esc>
@@ -79,7 +69,7 @@ call plug#begin()
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
   Plug 'junegunn/vader.vim'
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'skywind3000/asyncrun.vim'
   Plug 'dense-analysis/ale'
   Plug 'tpope/vim-commentary'

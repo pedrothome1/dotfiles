@@ -20,6 +20,8 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
   export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/m4/bin:$PATH"
 
+  export PATH="$HOMEBREW_PREFIX/opt/mysql/bin:$PATH"
+
   export MANPATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnuman:$MANPATH"
   export MANPATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnuman:$MANPATH"

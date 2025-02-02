@@ -42,37 +42,6 @@ l() {
   ls -lAh "$@"
 }
 
-rm() {
-  local -a params=("${@}")
-  local i
-
-  for (( i = 0; i < "${#params[@]}"; i++ )) do
-    if [[ -e "${params[i]}" ]]; then
-      break
-    fi
-  done
-
-  opts=("${params[@]:0:${i}}")
-
-  if (( i < "${#params[@]}" )); then
-    files=("${params[@]:${i}}")
-  else
-    files=()
-  fi
-
-  # We move deleted files to trash so they can be easily recovered.
-  if [[ ! -d "$HOME/.Trash" ]]; then
-    mkdir "$HOME/.Trash"
-  fi
-  local file
-  for file in "${files[@]}"; do
-    ( cp -rp "$file" "$HOME/.Trash/" &> /dev/null & )
-  done
-  wait
-
-  env rm "${opts[@]}" "${files[@]}"
-}
-
 gb() {
   # Try to get branch name
   ref="$(git symbolic-ref --short HEAD 2>/dev/null || true)"
