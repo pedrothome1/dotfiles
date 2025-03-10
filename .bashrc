@@ -27,15 +27,5 @@ if which mise &>/dev/null; then
   eval "$(mise activate bash)"
 fi
 
-if [[ "$OS_NAME" == "Darwin" ]]; then
-  if [[ -f "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]]; then
-    . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-  fi
-
-  if [[ -f "$HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash" ]]; then
-    . "$HOMEBREW_PREFIX/opt/asdf/etc/bash_completion.d/asdf.bash"
-  fi
-fi
-
 ## The following line is added by pre-commit
 export PATH="/private/var/root/Library/Python/3.9/bin:$PATH"

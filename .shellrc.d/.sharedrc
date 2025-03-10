@@ -9,6 +9,9 @@ if [[ "$OS_NAME" == "Darwin" && true ]]; then
     HOMEBREW_PREFIX="$(brew --prefix)"
   fi
 
+  # Metasploit framework
+  export PATH="/opt/metasploit-framework/bin:$PATH"
+
   export PATH="$HOMEBREW_PREFIX/opt/findutils/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
   export PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"

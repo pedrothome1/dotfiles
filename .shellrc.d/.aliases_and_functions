@@ -12,7 +12,7 @@ alias gpf='git push --force-with-lease'
 # Destructive commands are better used in their long form
 # alias grst='git restore --staged'
 # alias grs='git restore'
-alias 'gcan!'='git add . && git commit --amend --no-edit'
+# alias 'gcan!'='git add . && git commit --amend --no-edit'
 alias ls='ls --color=auto'
 alias la='ls -lAh'
 alias ll='ls -lh'
